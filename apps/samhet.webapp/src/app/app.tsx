@@ -13,51 +13,21 @@ import {
   BrowserRouter
 } from "react-router-dom";
 import { ListOfLogins } from './components/ListOfLogins';
-import { ColorSchemeToggle } from './components/TopBar';
 import { GlobalStyles } from '@mui/styled-engine';
 import type { Theme } from '@mui/joy/styles';
-import Layout from './components/Layout';
-import Typography from '@mui/joy/Typography';
-
-const PublicLayout = ({children}:{children: JSX.Element | JSX.Element[];}) => {
-  return (<Layout.Root
-        sx={{
-          gridTemplateColumns: {
-            xs: '1fr',
-            sm: 'minmax(64px, 200px) minmax(450px, 1fr)',
-            md: 'minmax(160px, 300px) minmax(600px, 1fr) minmax(300px, 420px)',
-          },
-        }}
-      >
-        <Layout.Header>
-         <Typography>samhet</Typography>
-          <div><ColorSchemeToggle /></div>
-        </Layout.Header>
-        <div></div>
-        <Layout.Main>
-        {children}
-        </Layout.Main>
+import { Provider } from 'react-redux'
+import { store } from './state/store';
+import { PublicLayout } from './components/PublicLayout';
+import { ProtectedLayout } from './components/ProtectedLayout';
 
 
-      </Layout.Root>
-  )
-};
 
-const ProtectedLayout = ({children}:{children: JSX.Element | JSX.Element[];}) => {
-  return (<Sheet>
-    <div>
-    <h1>samhet</h1>
-    <div><ColorSchemeToggle /></div>
-    </div>
- 
-  <div>protected route</div>
-  {children}
-  <div>footer</div>
-  </Sheet>)
-};
 
 export function App() {
+
+
   return (
+    <Provider store={store}>
     <CssVarsProvider disableTransitionOnChange theme={filesTheme}>
       <GlobalStyles<Theme>
         styles={(theme) => ({
@@ -88,6 +58,7 @@ export function App() {
     </BrowserRouter>
 
     </CssVarsProvider>
+    </Provider>
   );
 }
 
