@@ -3,8 +3,41 @@ import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
 import PersonIcon from '@mui/icons-material/Person';
 import Button from '@mui/joy/Button';
+import { useAppDispatch } from '../state/store';
+import { useNavigate } from 'react-router-dom';
+import { setCurrentUser, User } from '../state/userSlice';
 
-export const ListOfLogins = () => { 
+
+const users = [
+  { name: 'John Doe', id: '111111' },
+  { name: 'Jane Doe', id: '222222' },
+ ];
+
+export const ListOfLogins = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = (user: User) => {
+    dispatch(setCurrentUser(user));
+    navigate('/app');
+  }
+
+  const listOfUsers = users.map((user) => {
+    const onClick = () => handleLogin(user);
+    return  <>
+            <Typography
+              level="body2"
+              startDecorator={<PersonIcon color="primary" />}
+              sx={{ alignItems: 'flex-start' }}
+          >
+              {user.name}
+          </Typography>
+          <Typography level="body2">{user.id}</Typography>
+          <Typography level="body2">
+          <Button size="sm" onClick={onClick}>Login</Button>
+          </Typography></>
+  });
+
     return <Box
                 sx={{
                 display: 'grid',
@@ -39,32 +72,7 @@ export const ListOfLogins = () => {
                     Actions
                 </Typography>
 
-                <Typography
-                    level="body2"
-                    startDecorator={<PersonIcon color="primary" />}
-                    sx={{ alignItems: 'flex-start' }}
-                >
-                    Anders Andersson
-                </Typography>
-              <Typography level="body2">1111</Typography>
-              <Typography level="body2">
-                <Button size="sm">Login</Button>
-              </Typography>
-
-              <Typography
-                    level="body2"
-                    startDecorator={<PersonIcon color="primary" />}
-                    sx={{ alignItems: 'flex-start' }}
-                >
-                    Berit Beritsson
-                </Typography>
-              <Typography level="body2">2222</Typography>
-              <Typography level="body2">
-                <Button size="sm">Login</Button>
-              </Typography>
-
-
-
+               {listOfUsers}
                 </Sheet>
                 </Box>
 }

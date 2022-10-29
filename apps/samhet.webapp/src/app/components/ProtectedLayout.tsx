@@ -1,15 +1,40 @@
+import { Typography } from "@mui/joy";
+import Button from "@mui/joy/Button";
 import Sheet from "@mui/joy/Sheet";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../state/store";
+import { removeCurrentUser } from "../state/userSlice";
+import Layout from "./Layout";
 import { ColorSchemeToggle } from "./TopBar";
 
 export const ProtectedLayout = ({children}:{children: JSX.Element | JSX.Element[];}) => {
-    return (<Sheet>
-      <div>
-      <h1>samhet</h1>
-      <div><ColorSchemeToggle /></div>
-      </div>
-   
-    <div>protected route</div>
-    {children}
-    <div>footer</div>
-    </Sheet>)
+
+  const dipatch = useAppDispatch();
+  const navigate = useNavigate();
+  const logout = () => {
+    dipatch(removeCurrentUser());
+    navigate('/login');
+  };
+      return (<Layout.Root
+        sx={{
+          gridTemplateColumns: {
+            xs: '1fr',
+            sm: 'minmax(64px, 200px) minmax(450px, 1fr)',
+            md: 'minmax(160px, 300px) minmax(600px, 1fr) minmax(300px, 420px)',
+          },
+        }}
+      >
+        <Layout.Header>
+         <Typography>samhet</Typography>
+          <div>
+            <Button onClick={logout}>Log out</Button><ColorSchemeToggle />
+            <ColorSchemeToggle />
+          </div>
+        </Layout.Header>
+        <div></div>
+        <Layout.Main>
+        {children}
+        </Layout.Main>
+      </Layout.Root>
+  )
   };

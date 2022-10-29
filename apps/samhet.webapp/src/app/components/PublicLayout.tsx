@@ -20,8 +20,6 @@ export const PublicLayout = ({children}:{children: JSX.Element | JSX.Element[];}
           <Layout.Main>
           {children}
           </Layout.Main>
-  
-  
         </Layout.Root>
     )
   };
