@@ -1,5 +1,5 @@
 import { Media } from "./media";
-import { Profile } from "./profile";
+import { Profile } from "./entities";
 
 enum MessageStatus {
   Created,

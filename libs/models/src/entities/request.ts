@@ -1,5 +1,5 @@
 import { Media } from "./media";
-import { Gender, Profile } from "./profile";
+import { Gender, Profile } from "./entities";
 
 enum LookingFor {
   Male,

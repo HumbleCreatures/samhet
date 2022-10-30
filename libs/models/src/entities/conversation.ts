@@ -1,4 +1,4 @@
-import { Profile } from "./profile"
+import { Profile } from "./entities"
 export enum ParticipationStatus {
   Joined,
   Left,

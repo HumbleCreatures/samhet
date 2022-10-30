@@ -1,4 +1,4 @@
-import { Profile } from "./profile";
+import { Profile } from "./entities";
 
 export class Answer {
   id: number;
