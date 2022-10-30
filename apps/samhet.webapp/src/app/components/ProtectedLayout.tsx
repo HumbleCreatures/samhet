@@ -27,7 +27,7 @@ export const ProtectedLayout = ({children}:{children: JSX.Element | JSX.Element[
         <Layout.Header>
          <Typography>samhet</Typography>
           <div>
-            <Button onClick={logout}>Log out</Button><ColorSchemeToggle />
+            <Button onClick={logout}>Log out</Button>
             <ColorSchemeToggle />
           </div>
         </Layout.Header>

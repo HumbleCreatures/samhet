@@ -21,10 +21,13 @@ export class ProfileResolver  {
 
   @Query(returns => [Profile], { nullable: true })
   async myProfiles(@Ctx("userId") userId: string): Promise<Profile[] | undefined> {
-    // Get from database
     const authentications = await AppDataSource.getRepository(Authentication).findBy({
       authenticationId: userId,
     });
+
+    if(authentications.length === 0) {
+      return undefined;
+    }
 
     const profileIds = authentications.map(auth => auth.profileId);
     const profiles = await AppDataSource.manager

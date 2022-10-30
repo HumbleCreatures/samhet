@@ -8,10 +8,10 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const userId = store.getState().user.currentUser?.id;
-  headers['x-user-id'] = userId;
   return {
     headers: {
       ...headers,
+      'x-user-id': userId,
       //authorization: token ? `Bearer ${token}` : "",
     }
   }

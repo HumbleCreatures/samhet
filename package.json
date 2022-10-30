@@ -16,6 +16,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.10.9",
     "@mui/joy": "^5.0.0-alpha.49",
+    "@mui/material": "^5.10.11",
     "@reduxjs/toolkit": "^1.8.6",
     "class-validator": "^0.13.2",
     "core-js": "^3.6.5",

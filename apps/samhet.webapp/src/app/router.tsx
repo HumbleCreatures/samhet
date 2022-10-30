@@ -8,6 +8,7 @@ import { ListOfLogins } from './components/ListOfLogins';
 import { PublicLayout } from './components/PublicLayout';
 import { ProtectedLayout } from './components/ProtectedLayout';
 import { useAppSelector } from "./state/store";
+import { MyProfileView } from "./profile/MyProfileView";
 
 export const MainRouter = () => {
 
@@ -20,7 +21,7 @@ export const MainRouter = () => {
 
     {user &&
       <Route  path='/app'>
-        <Route index element={<ProtectedLayout><div>My page</div></ProtectedLayout>} />
+        <Route index element={<ProtectedLayout><MyProfileView /></ProtectedLayout>} />
         <Route path="profile" element={<ProtectedLayout><div>profile</div></ProtectedLayout>} />
       </Route>
     }
