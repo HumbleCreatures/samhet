@@ -1,7 +1,7 @@
 import { Typography } from "@mui/joy";
 import Button from "@mui/joy/Button";
-import Sheet from "@mui/joy/Sheet";
 import { useNavigate } from "react-router-dom";
+import { ProfileBadge } from "../profile/ProfileBadge";
 import { useAppDispatch } from "../state/store";
 import { removeCurrentUser } from "../state/userSlice";
 import Layout from "./Layout";
@@ -27,6 +27,7 @@ export const ProtectedLayout = ({children}:{children: JSX.Element | JSX.Element[
         <Layout.Header>
          <Typography>samhet</Typography>
           <div>
+            <ProfileBadge />
             <Button onClick={logout}>Log out</Button>
             <ColorSchemeToggle />
           </div>

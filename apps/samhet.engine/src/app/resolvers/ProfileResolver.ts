@@ -61,11 +61,24 @@ export class ProfileResolver  {
     return savedProfile;
   }
 
+  @Mutation(returns => Profile)
   async updateProfile(@Arg("profile") profileInput: EditProfileInput, @Ctx("profileId") profileId: string): Promise<Profile> {
     if(!profileId) {
       throw new Error("No profile selected");
     }
-    return null;
+
+    const profile = await AppDataSource.getRepository(Profile).findOneBy({id: profileId});
+    if(!profile) {
+      throw new Error("No profile selected");
+    }
+
+    Object.assign(profile, profileInput);
+
+    console.log(JSON.stringify(profileInput));
+    console.log(JSON.stringify(profile));
+    const savedProfile = await AppDataSource.manager.save(profile);
+
+    return savedProfile;
   }
 
 }
