@@ -12,6 +12,8 @@ import { MyProfileView } from "./profile/MyProfileView";
 import { EditProfileView } from "./profile/EditProfileView";
 import { useEffect } from "react";
 import { fetchProfiles } from "./profile/profileSlice";
+import { ProfileList } from "./profile/ProfileList";
+import { ProfileView } from "./profile/ProfileView";
 
 export const MainRouter = () => {
   const user = useAppSelector((state) => state.user.currentUser);
@@ -19,7 +21,9 @@ export const MainRouter = () => {
   const profilesLoaded = useAppSelector((state) => state.profile.profilesLoaded);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchProfiles());
+    if (user) {
+      dispatch(fetchProfiles());
+    }
   }, [user, dispatch]);
 
   if(user && !profilesLoaded) {
@@ -34,6 +38,8 @@ export const MainRouter = () => {
       <Route  path='/app'>
         <Route index element={<ProtectedLayout><MyProfileView /></ProtectedLayout>} />
         <Route path="profile" element={<ProtectedLayout><div>profile</div></ProtectedLayout>} />
+        <Route path="profiles" element={<ProtectedLayout><ProfileList /></ProtectedLayout>} />
+        <Route path="profile/:displayNameParam" element={<ProtectedLayout><ProfileView /></ProtectedLayout>} />
         <Route path="profile/edit" element={<ProtectedLayout><EditProfileView/></ProtectedLayout>} />
       </Route>
     }

@@ -1,0 +1,60 @@
+{
+  "name": "samhet.socket-engine",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/samhet.socket-engine/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/samhet.socket-engine",
+        "main": "apps/samhet.socket-engine/src/main.ts",
+        "tsConfig": "apps/samhet.socket-engine/tsconfig.app.json",
+        "assets": ["apps/samhet.socket-engine/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/samhet.socket-engine/src/environments/environment.ts",
+              "with": "apps/samhet.socket-engine/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "samhet.socket-engine:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "samhet.socket-engine:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/samhet.socket-engine/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/samhet.socket-engine"],
+      "options": {
+        "jestConfig": "apps/samhet.socket-engine/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

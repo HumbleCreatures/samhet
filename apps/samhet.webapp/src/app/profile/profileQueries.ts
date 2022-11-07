@@ -16,6 +16,7 @@ query MyProfiles {
 `;
 
 export interface MyProfilesData { myProfiles: Profile[]; }
+export interface ProfileQuery { allProfiles: Profile[]; }
 
 
 export const CREATE_PROFILE = gql`mutation CreateProfile($profile: EditProfileInput!) {
@@ -36,3 +37,28 @@ export const UPDATE_PROFILE = gql`mutation Mutation($profile: EditProfileInput!)
     city
   }
 }`
+
+
+export const ALL_PROFILES = gql`query Query {
+  allProfiles {
+    id
+    displayName
+    age
+    gender
+    city
+  }
+}`
+
+export const PROFILE_BY_DISPLAY_NAME = gql`query ProfileByDisplayName($displayName: String!) {
+  profileByDisplayName(displayName: $displayName) {
+    id
+    displayName
+    age
+    gender
+    city
+    description
+  }
+}`
+
+
+export interface ProfileByDisplayNameQuery { profileByDisplayName: Profile | undefined; }

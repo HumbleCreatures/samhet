@@ -5,6 +5,7 @@ import { ProfileBadge } from "../profile/ProfileBadge";
 import { useAppDispatch } from "../state/store";
 import { removeCurrentUser } from "../state/userSlice";
 import Layout from "./Layout";
+import { LoggedInMenu } from "./LoggedInMenu";
 import { ColorSchemeToggle } from "./TopBar";
 
 export const ProtectedLayout = ({children}:{children: JSX.Element | JSX.Element[];}) => {
@@ -27,6 +28,7 @@ export const ProtectedLayout = ({children}:{children: JSX.Element | JSX.Element[
         <Layout.Header>
          <Typography>samhet</Typography>
           <div>
+            <LoggedInMenu />
             <ProfileBadge />
             <Button onClick={logout}>Log out</Button>
             <ColorSchemeToggle />

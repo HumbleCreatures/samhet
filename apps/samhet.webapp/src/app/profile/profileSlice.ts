@@ -21,9 +21,12 @@ const initialState: ProfileState = {
 export const fetchProfiles = createAsyncThunk(
   'profile/fetchProfiles',
   async () => {
+    console.log('fetchProfiles');
     const response = await client.query<MyProfilesData>({
       query: GET_MY_PROFILES,
     });
+
+    console.log(response);
 
     return response.data.myProfiles;
   }

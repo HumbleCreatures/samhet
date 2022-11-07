@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@samhet/models": ["libs/models/src/index.ts"]
+      "@samhet/models": ["libs/models/src/index.ts"],
+      "@samhet/persistent-models": ["libs/persistent-models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

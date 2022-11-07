@@ -1,4 +1,5 @@
-import { Profile } from "./entities";
+import { Profile } from "./profile";
+
 export enum PodMemberStatus {
   Primary,
   Secondary,

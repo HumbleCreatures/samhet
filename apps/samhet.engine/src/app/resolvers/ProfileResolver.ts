@@ -1,5 +1,5 @@
 import {Resolver, Query, Mutation, Arg, Ctx} from 'type-graphql-v2-fork';
-import { Profile, EditProfileInput, Authentication } from '@samhet/models';
+import { Profile, EditProfileInput, Authentication } from '@samhet/persistent-models';
 import { AppDataSource } from '../AppDataSource';
 
 
@@ -14,8 +14,8 @@ export class ProfileResolver  {
 
   @Query(returns => Profile, { nullable: true })
   async profileByDisplayName(@Arg("displayName") displayName: string): Promise<Profile | undefined> {
-    // Get from database
-    return null;
+    const profile = await AppDataSource.getRepository(Profile).findOneBy({displayName});
+    return profile;
   }
 
 
@@ -30,6 +30,7 @@ export class ProfileResolver  {
     }
 
     const profileIds = authentications.map(auth => auth.profileId);
+    console.log(profileIds);
     const profiles = await AppDataSource.manager
     .createQueryBuilder(Profile, "profile")
     .where("id IN (:...profileIds)", { profileIds })
@@ -41,6 +42,7 @@ export class ProfileResolver  {
   @Query(returns => [Profile], { description: "Get all the profiles" })
   async allProfiles(): Promise<Profile[]> {
     const allProfiles = await AppDataSource.getRepository(Profile).find();
+    console.log(allProfiles);
     return allProfiles;
   }
 
@@ -73,9 +75,6 @@ export class ProfileResolver  {
     }
 
     Object.assign(profile, profileInput);
-
-    console.log(JSON.stringify(profileInput));
-    console.log(JSON.stringify(profile));
     const savedProfile = await AppDataSource.manager.save(profile);
 
     return savedProfile;

@@ -1,4 +1,4 @@
-import { Authentication, Profile } from "@samhet/models";
+import { Authentication, Profile } from '@samhet/persistent-models';
 import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({

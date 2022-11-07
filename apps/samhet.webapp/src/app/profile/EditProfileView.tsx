@@ -1,5 +1,5 @@
 import { Button, Option, Select, Sheet, TextField, Typography } from "@mui/joy"
-import { EditProfileInput, Gender } from "@samhet/models"
+import { AvailableLocations, EditProfileInput, Gender } from "@samhet/models"
 import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../state/store"
 import { createProfile, updateProfile } from "./profileSlice"
@@ -22,7 +22,6 @@ export const EditProfileView = () => {
       displayName: selectedProfile?.displayName || '',
       age: selectedProfile?.age,
       city: selectedProfile?.city,
-      gender: selectedProfile?.gender || 'Female' as Gender,
     });
 
    }, [selectedProfile, setEditProfileState])
@@ -69,7 +68,19 @@ export const EditProfileView = () => {
               age: parseInt(e.target.value)})}
           />
 
-      <label htmlFor="select-button" id="select-label">Gender</label>
+      <label htmlFor="select-button-location" id="select-label-location">Location</label>
+      <Select
+        componentsProps={{
+          button: {
+            id: 'select-button-location',
+            'aria-labelledby': 'select-label-location select-button-location',
+          }
+        }}
+      >
+        {JSON.stringify(AvailableLocations)}
+
+      </Select>
+
       <Select
         value={editProfileState.gender || 'Female'}
         onChange={(e, newValue) =>

@@ -4,7 +4,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { buildSchema } from 'type-graphql-v2-fork';
 import { AppDataSource } from "./app/AppDataSource";
 import { ProfileResolver } from "./app/resolvers/ProfileResolver";
-
+import { Server } from "socket.io";
 
 const main = async () => {
 
