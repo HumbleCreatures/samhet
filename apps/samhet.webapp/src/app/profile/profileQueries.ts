@@ -10,6 +10,11 @@ query MyProfiles {
     city
     description
     lookingFor
+    location {
+      lat
+      lng
+      name
+    }
     id
   }
 }

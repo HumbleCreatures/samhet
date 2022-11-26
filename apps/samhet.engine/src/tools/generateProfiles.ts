@@ -11,9 +11,7 @@ const distribution = [1,1,1,1,1,1,1,2,2,2];
 
 const sexes = [ Gender.Male, Gender.Female];
 
-
-
-export const GenerateUser = () : EditProfileInput => {
+const GenerateUser = () : EditProfileInput => {
     const lookingFor = faker.helpers.arrayElements(sexes).slice(0,distribution[randomIntFromInterval(0,9)]);
 
     return {
@@ -26,13 +24,26 @@ export const GenerateUser = () : EditProfileInput => {
     }
 }
 
-export const SaveToDatabase = async () => {
-  Array(100).fill(null).map( async () => {
-    const profileInput = GenerateUser();
-    const profile = new Profile(profileInput);
-    await AppDataSource.manager.save(profile);
-  });
+const SaveToDatabase = async () => {
+
+  try {
+    await AppDataSource.initialize();
+
+    const saves = Array(100).fill(null).map( async () => {
+      console.log('Saving profile');
+
+        const profileInput = GenerateUser();
+        const profile = new Profile(profileInput);
+        await AppDataSource.manager.save(profile);
+    });
+
+  await Promise.all(saves);
+  console.log('Done generating profiles');
+} catch(err) {
+  console.log(err);
+}
+
 };
 
-
+console.log('done');
 SaveToDatabase();

@@ -29,6 +29,32 @@
         }
       }
     },
+    "buildTools": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/tools",
+        "main": "apps/samhet.engine/src/tools/generateProfiles.ts",
+        "tsConfig": "apps/samhet.engine/tsconfig.app.json",
+        "assets": ["apps/samhet.engine/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/samhet.engine/src/environments/environment.ts",
+              "with": "apps/samhet.engine/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+
     "serve": {
       "executor": "@nrwl/js:node",
       "options": {

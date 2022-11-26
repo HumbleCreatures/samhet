@@ -33,6 +33,6 @@ export class EditProfileInput implements EditProfileInputInterface {
   description?: string;
 
   @Field(type => [Gender], { nullable: true })
-  lookingFor?: Gender[];
+  lookingFor: Gender[];
 }
 

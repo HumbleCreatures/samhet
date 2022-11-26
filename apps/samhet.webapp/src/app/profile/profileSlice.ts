@@ -40,7 +40,7 @@ export const updateProfile = createAsyncThunk(
       mutation: UPDATE_PROFILE,
       variables: { profile: editProfileInput },
       refetchQueries: [{ query: GET_MY_PROFILES }]
-    });
+    }).catch((error) => { console.log(error) });
 
     await client.resetStore();
 

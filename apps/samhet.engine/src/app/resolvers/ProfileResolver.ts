@@ -50,6 +50,9 @@ export class ProfileResolver  {
   async createProfile(@Arg("profile") profileInput: EditProfileInput, @Ctx("userId") userId: string): Promise<Profile> {
 
     const profile = new Profile(profileInput);
+
+    console.log(JSON.stringify(profile));
+
     let savedProfile: Profile = null;
     await AppDataSource.manager.transaction(async (transactionalEntityManager) => {
       savedProfile = await transactionalEntityManager.save(profile);

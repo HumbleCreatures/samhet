@@ -6,6 +6,6 @@ export interface EditProfileInput {
   city?: string;
   location?: Location;
   description?: string;
-  lookingFor?: Gender[];
+  lookingFor: Gender[];
 }
 

@@ -1,4 +1,4 @@
-import { Authentication, Profile } from '@samhet/persistent-models';
+import { Authentication, PodMember, Profile, Pod } from '@samhet/persistent-models';
 import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
   database: "postgres",
   synchronize: true,
   logging: true,
-  entities: [Profile, Authentication],
+  entities: [Profile, Authentication, Pod, PodMember],
   subscribers: [],
   migrations: [],
 })

@@ -1,4 +1,7 @@
+import { PodMember } from "./podMembership";
+
 export class Pod {
-  id: number;
-  displayName: string;
+  id: string;
+  members: PodMember[];
+  deleted: boolean;
 }

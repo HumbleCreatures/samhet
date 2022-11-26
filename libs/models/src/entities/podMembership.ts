@@ -1,15 +1,22 @@
+import { Pod } from "./pod";
 import { Profile } from "./profile";
 
 export enum PodMemberStatus {
   Primary,
   Secondary,
-  Left,
 }
+
+export enum MembershipType {
+  Invite,
+  Algorithm,
+}
+
 export class PodMember {
-  id: number;
-  podId: number;
+  id: string;
   profile: Profile;
   createdAt: Date;
   updatedAt: Date;
   status: PodMemberStatus;
+  membershipType: MembershipType;
+  pod: Pod;
 }

@@ -1,8 +1,9 @@
 
-import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn, DeleteDateColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, VersionColumn, DeleteDateColumn, OneToMany} from 'typeorm';
 import {Field, ID, ObjectType, registerEnumType} from 'type-graphql-v2-fork';
 import { EditProfileInput } from '../inputs/profileInput';
-import { Gender, Location, Profile as ProfileInterface } from '@samhet/models';
+import { Gender, Location, Profile as ProfileInterface, PodMember as PodMemberInterface } from '@samhet/models';
+import { PodMember } from './podMember';
 
 registerEnumType(Gender, {
   name: "Gender"
@@ -38,7 +39,6 @@ export class Profile implements ProfileInterface {
   age: number;
 
   @Field(type => Gender, { nullable: true })
-  @Column({ nullable: true })
   @Column({
     type: "enum",
     enum: Gender,
@@ -63,6 +63,9 @@ export class Profile implements ProfileInterface {
   @Column({ type: 'simple-json', nullable: true })
   lookingFor: Gender[];
 
+  @OneToMany(() => PodMember, (member) => member.profile)
+  memberships: PodMemberInterface[];
+
   @CreateDateColumn()
   createdAt: Date;
 
@@ -74,4 +77,5 @@ export class Profile implements ProfileInterface {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
 }
