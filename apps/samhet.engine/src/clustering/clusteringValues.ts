@@ -1,30 +1,30 @@
-import { Profile, Sex } from "./userDatabase"
+import { Profile } from "@samhet/persistent-models";
 
 export const GetValuesFromProfile = (profile: Profile) => {
     
     let heteroScore = 100;
-    if (profile.searchingFor.some(sex => sex !== profile.sex)) {
+    if (profile.lookingFor.some(sex => sex !== profile.gender)) {
         heteroScore = heteroScore + 100;
     }
 
-    if (profile.searchingFor.some(sex => sex === profile.sex)) {
+    if (profile.lookingFor.some(sex => sex === profile.gender)) {
         heteroScore = heteroScore - 100;
     }
 
-    let gayScore = 100;
-    if (profile.searchingFor.some(sex => sex !== profile.sex)) {
-        gayScore = gayScore - 100;
+    let homoScore = 100;
+    if (profile.lookingFor.some(sex => sex !== profile.gender)) {
+        homoScore = homoScore - 100;
     }
 
-    if (profile.searchingFor.some(sex => sex === profile.sex)) {
-        gayScore = gayScore + 100;
+    if (profile.lookingFor.some(sex => sex === profile.gender)) {
+        homoScore = homoScore + 100;
     }
 
     return [
         heteroScore,
-        gayScore,
+        homoScore,
         profile.age,
-        profile.cityCoordinates[0],
-        profile.cityCoordinates[1]
+        profile.location.lat,
+        profile.location.lng
     ]
 }

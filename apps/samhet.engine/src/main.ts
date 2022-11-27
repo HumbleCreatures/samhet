@@ -4,7 +4,8 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import { buildSchema } from 'type-graphql-v2-fork';
 import { AppDataSource } from "./app/AppDataSource";
 import { ProfileResolver } from "./app/resolvers/ProfileResolver";
-import { Server } from "socket.io";
+import { PodResolver } from "./app/resolvers/PodResolver";
+
 
 const main = async () => {
 
@@ -12,7 +13,7 @@ const main = async () => {
     .catch((error) => console.log(error))
 
   const schema = await buildSchema({
-    resolvers: [ProfileResolver],
+    resolvers: [ProfileResolver, PodResolver],
   });
 
   const server = new ApolloServer({

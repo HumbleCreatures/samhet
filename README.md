@@ -2,9 +2,14 @@
 
 # Samhet
 
-This project was generated using [Nx](https://nx.dev).
+Setup postgress for development
+`docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres`
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+
+
+
+
+This project was generated using [Nx](https://nx.dev).
 
 🔎 **Smart, Fast and Extensible Build System**
 

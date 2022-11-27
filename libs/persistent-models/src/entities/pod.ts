@@ -10,10 +10,14 @@ export class Pod implements PodInterface {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Field({ nullable: true })
+  @Column()
+  displayName: string;
+
   @OneToMany(() => PodMember, (member) => member.pod)
   @Field(type => PodMember, { nullable: false })
   members: PodMemberInterface[];
 
-  @Column()
+  @Column({default: false})
   deleted: boolean;
 }

@@ -29,11 +29,12 @@ const SaveToDatabase = async () => {
   try {
     await AppDataSource.initialize();
 
-    const saves = Array(100).fill(null).map( async () => {
+    const saves = Array(10).fill(null).map( async () => {
       console.log('Saving profile');
 
         const profileInput = GenerateUser();
         const profile = new Profile(profileInput);
+        console.log(profile);
         await AppDataSource.manager.save(profile);
     });
 
