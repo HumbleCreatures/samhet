@@ -47,6 +47,7 @@ export class PodMember implements PodMemberInterface {
   })
   @Field(type => MembershipType, { nullable: false })
   membershipType: MembershipType;
+
   @Field(type => Pod, { nullable: false })
   @ManyToOne(() => Pod, (pod) => pod.members)
   pod: PodInterface;

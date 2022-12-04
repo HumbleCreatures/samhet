@@ -15,7 +15,7 @@ export class Pod implements PodInterface {
   displayName: string;
 
   @OneToMany(() => PodMember, (member) => member.pod)
-  @Field(type => PodMember, { nullable: false })
+  @Field(type => [PodMember], { nullable: false })
   members: PodMemberInterface[];
 
   @Column({default: false})
